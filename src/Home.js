@@ -1,5 +1,8 @@
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect,useState } from "react";
 function Home() {
+  const [AllData, setAllData] = useState([])
   let data = [
     {
       img: "logo512.png",
@@ -22,11 +25,15 @@ function Home() {
         desc: "Java Course",
       },
   ];
+  useEffect(()=>{
+    // api to be added in empty string
+    axios.get('').then((res)=>{setAllData(res.data)})
+  })
   return (
     <>
       <div className="container mt-5">
         <div className="row">
-          {data.map((elem, index) => {
+          {AllData.map((elem, index) => {
             return (
               <div key={index} className="col-2">
                 <div className="card text-center" style={{height:'16rem' ,width: "12rem",borderColor:'grey',borderWidth:'2px'}}>

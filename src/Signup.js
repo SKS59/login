@@ -1,8 +1,9 @@
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
-
+import {toast} from 'react-toastify';
 function Signup() {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
@@ -11,7 +12,12 @@ function Signup() {
   let navigate=useNavigate();
   const handleSubmit = () =>{
     // if(email==='abc@gmail.com' && password==='1234'){
-      navigate('/login')
+      console.log('in handle')
+      axios.post('http://localhost:4000/users',{email,password,firstname,lastname,cart:[],address:[],wishlist:[],card:[],orders:[]}).then((res)=>{
+        toast.success('Added user successfully')
+        navigate('/login')
+      })
+      
     // }
   }
   return (
@@ -45,7 +51,7 @@ function Signup() {
                 <input placeholder='Last Name' value={lastname} onChange={(e)=> setlastname(e.target.value)} type="text" id="typeEmailX" className="form-control form-control-lg" />
               </div>
 
-              <button onClick={handleSubmit} className="btn btn-outline-info btn-lg px-5" type="submit">Signup</button>
+              <button onClick={handleSubmit} className="btn btn-outline-success btn-lg px-5" type="submit">Signup</button>
 
             </div>
 

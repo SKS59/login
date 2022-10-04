@@ -28,7 +28,7 @@ function Home() {
   useEffect(()=>{
     // api to be added in empty string
     axios.get('').then((res)=>{setAllData(res.data)})
-  })
+  },[])
   return (
     <>
       <div className="container mt-5">
